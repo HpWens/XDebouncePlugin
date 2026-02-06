@@ -1,0 +1,74 @@
+//apply plugin: 'com.android.library'
+//apply plugin: "com.vanniktech.maven.publish"
+//android {
+//    compileSdk 35
+//
+//    defaultConfig {
+//        minSdk 21
+//        targetSdk 35
+//        versionCode 1
+//        versionName "1.0.0"
+//        consumerProguardFiles "consumer-rules.pro"
+//    }
+//    buildTypes {
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//        }
+//    }
+//}
+//
+//dependencies {
+//}
+
+plugins {
+    // 1. 使用 id 写法
+    id 'com.android.library'
+}
+
+group = "com.sunyuan.debounce.lib"
+version = "1.0.0"
+
+android {
+    // 5. 【关键】必须显式声明 namespace
+    // AGP 8.0+ 移除了 AndroidManifest.xml 中的 package 属性作为命名空间的功能
+    namespace 'com.sunyuan.debounce.lib'
+
+    compileSdk 35
+
+    defaultConfig {
+        minSdk 24
+        // 6. 注意：在 Library 模块中，targetSdk 实际上是无效的（由宿主 App 决定）。
+        // 虽然写了不报错，但 Google 建议在 Library 中移除 targetSdk 配置。
+        targetSdk 35
+
+        // 版本号通常在 Library 中也不生效（由发布时的坐标决定），但保留无妨
+        // versionCode 1
+        // versionName "1.0.0"
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // 8. 可能会用到的构建特性配置 (按需开启)
+    buildFeatures {
+        buildConfig = false // AGP 9 默认为 false，如果代码里没用 BuildConfig 建议保持关闭以提升速度
+    }
+}
+
+dependencies {
+
+}

@@ -1,5 +1,5 @@
 include ':simple'
-include ':debounce-lib'
-includeBuild 'debounce-plugin'
+//include ':debounce-lib'
+//includeBuild 'debounce-plugin'
 include ':asm-test'
 //include ':simple-lib'

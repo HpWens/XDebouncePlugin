@@ -4,7 +4,7 @@
 
 plugins {
     id 'com.android.application'
-    id 'xdebounce-plugin'
+    id 'debounce-plugin'
     // AGP 9 推荐使用 Kotlin 2.0+，对应的 ID 为 org.jetbrains.kotlin.android
 //    id 'org.jetbrains.kotlin.android'
     // 引用你的自定义插件 (需确保该插件已发布且适配了 AGP 9 的 Instrumentation API)
@@ -75,7 +75,8 @@ dependencies {
     // implementation(name: 'simple-lib-release', ext: 'aar')
     // implementation 'io.github.sy007:debounce-lib:2.1.5'
 
-    implementation project(":debounce-lib")
+//    implementation project(":debounce-lib")
+    implementation 'hwsj:debounce_lib:1.0.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

@@ -12,9 +12,9 @@ buildscript {
         google()
         mavenCentral()
         gradlePluginPortal()
-        // maven {
-        //     url("https://s01.oss.sonatype.org/content/repositories/snapshots")
-        // }
+        maven {
+            url("https://s01.oss.sonatype.org/content/repositories/snapshots")
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:9.0.0'
@@ -33,9 +33,6 @@ plugins {
     id 'com.vanniktech.maven.publish' version '0.30.0'
 }
 
-group = "com.sunyuan.click.debounce"
-version = "1.0.0"
-
 repositories {
     // 阿里云 Maven 仓库镜像
     maven { url 'https://maven.aliyun.com/repository/public' }
@@ -48,9 +45,9 @@ repositories {
     google()
     mavenCentral()
     gradlePluginPortal()
-    //maven {
-    //    url("https://s01.oss.sonatype.org/content/repositories/snapshots")
-    //}
+    maven {
+        url("https://s01.oss.sonatype.org/content/repositories/snapshots")
+    }
 }
 
 tasks.withType(JavaCompile) {
@@ -62,6 +59,8 @@ gradlePlugin {
         version {
             id = 'xdebounce-plugin'
             implementationClass = 'com.sunyuan.click.debounce.DebouncePlugin'
+            displayName = 'Debounce Plugin'
+            description = 'A plugin to handle click debounce'
         }
     }
 }
@@ -98,7 +97,24 @@ dependencies {
     implementation 'org.ow2.asm:asm-util:9.9.1'
     implementation 'org.ow2.asm:asm-commons:9.9.1'
 
-    implementation 'com.android.tools:sdklib:31.13.2'
+    implementation 'com.android.tools:sdklib:32.0.0'
     implementation "org.apache.commons:commons-compress:1.28.0"
     implementation "com.didiglobal.booster:booster-kotlinx:5.1.0"
 }
+
+group = "com.sunyuan.click.debounce"
+version = "1.0.0"
+
+//mavenPublishing {
+//    repositories {
+//        maven {
+//            name = "xdebounce-plugin"
+//            url = uri("http://192.168.200.253:8081/repository/maven-releases/")
+//            credentials {
+//                username = "android"
+//                password = "android2024"
+//            }
+//            allowInsecureProtocol(true)
+//        }
+//    }
+//}

@@ -24,6 +24,7 @@
 plugins {
     // 1. 使用 id 写法
     id 'com.android.library'
+    id 'maven-publish'
 }
 
 group = "com.sunyuan.debounce.lib"
@@ -67,8 +68,44 @@ android {
     buildFeatures {
         buildConfig = false // AGP 9 默认为 false，如果代码里没用 BuildConfig 建议保持关闭以提升速度
     }
+
+    publishing {
+        singleVariant('release') {
+            withSourcesJar() // 可选：如果你想发布源码
+            withJavadocJar() // 可选：如果你想发布 JavaDoc
+        }
+    }
+
 }
 
 dependencies {
 
+}
+
+publishing {
+    def VERSION = "1.0.0"
+    // 必须配置 publishing 选项，告诉插件发布 release 版本的 AAR
+    publications {
+        release(MavenPublication) {
+            // Applies the component for the release build variant.
+            groupId = "hwsj"
+            artifactId = "debounce_lib"
+            version = VERSION
+            // 发布release包
+            afterEvaluate {
+                from components.release
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = "debounce_lib"
+            url = uri("http://192.168.200.253:8081/repository/maven-releases/")
+            credentials {
+                username = "android"
+                password = "android2024"
+            }
+            allowInsecureProtocol(true)
+        }
+    }
 }

@@ -2,6 +2,15 @@
 buildscript {
     ext.kotlin_version = "2.1.0"
     repositories {
+        // 你的私有仓库放在最前面
+        maven {
+            url = uri("http://192.168.200.253:8081/repository/maven-releases/")
+            credentials {
+                username = "android"
+                password = "android2024"
+            }
+            allowInsecureProtocol(true)
+        }
         // 阿里云 Maven 仓库镜像
         maven { url 'https://maven.aliyun.com/repository/public' }
         // 阿里云 Google Maven 仓库镜像
@@ -22,16 +31,26 @@ buildscript {
         classpath 'com.vanniktech:gradle-maven-publish-plugin:0.22.0'
 
         // classpath 'io.github.sy007:debounce-plugin:2.1.5'
+        classpath "hwsj:debounce-plugin:1.0.0"
     }
 }
 
 //开发用
-plugins {
-    id "xdebounce-plugin" apply false
-}
+//plugins {
+//    id "xdebounce-plugin" apply false
+//}
 
 allprojects {
     repositories {
+        // 你的私有仓库放在最前面
+        maven {
+            url = uri("http://192.168.200.253:8081/repository/maven-releases/")
+            credentials {
+                username = "android"
+                password = "android2024"
+            }
+            allowInsecureProtocol(true)
+        }
         // 阿里云 Maven 仓库镜像
         maven { url 'https://maven.aliyun.com/repository/public' }
         // 阿里云 Google Maven 仓库镜像
